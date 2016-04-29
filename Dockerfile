@@ -2,6 +2,9 @@
 FROM resin/rpi-raspbian:jessie
 MAINTAINER Andrew Cencini <andrew@vapor.io>
 
+ENV http_proxy="http://emkno:XXX@proxy.XXX.com:8080/"
+ENV https_proxy="https://emkno:XXXX@proxy.XXX.com:8080/"
+
 # Install dependencies
 RUN apt-get update && apt-get install -y \
     git-core \
@@ -11,6 +14,7 @@ RUN apt-get update && apt-get install -y \
     python-dev \
     python-pip \
     python-virtualenv \
+    vim\
     --no-install-recommends && \
     rm -rf /var/lib/apt/lists/*
 RUN pip install pyserial
@@ -22,5 +26,12 @@ RUN pip install wiringpi2
 WORKDIR /data
 VOLUME /data
 
+COPY blink.c /data
+COPY bashfile.sh /usr/local/bin
+RUN ["/bin/bash", "-c", "chmod +x /usr/local/bin/bashfile.sh"]
+
 # Define default command
+#CMD ["/../usr/local/bin/bashfile.sh"]
 CMD ["bash"]
+
+

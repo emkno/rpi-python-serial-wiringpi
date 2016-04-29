@@ -6,6 +6,7 @@ Raspberry Pi compatible Docker base image with Python, C, serial support (pyseri
 
 [HypriotOS](http://blog.hypriot.com/)
 
+Vim also installed.
 Run all the commands from within the project root directory.
 
 #### Build the Docker Image
@@ -20,6 +21,11 @@ Replace YOUR_IMAGE_HERE with image name (acencini/rpi-python-serial-wiringpi if 
 
 ```
 docker run --device /dev/mem:/dev/mem --device /dev/ttyAMA0:/dev/ttyAMA0 --privileged -ti YOUR_IMAGE_HERE /bin/bash
+```
+Check with:
+
+```
+gpio readall
 ```
 
 [MIT Licensed]([http://opensource.org/licenses/MIT])
